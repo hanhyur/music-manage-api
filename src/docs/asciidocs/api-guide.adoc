@@ -1,0 +1,55 @@
+= EXAMPLE BACKEND API GUIDE
+niceday.lucas@gmail.com;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+
+== 샘플
+=== #목록#
+operation::sample-test/t01_get-all[snippets='curl-request,request-fields,http-request,response-body']
+==== Response status
+|====
+| Status code | Usage
+| 200 | 성공
+|====
+
+=== #조회#
+operation::sample-test/t02_get[snippets='curl-request,path-parameters,http-request,response-fields,response-body']
+==== Response status
+|====
+| Status code | Usage
+| 200 | 성공
+| 404 | 사용자 응답 오류(데이터 없음)
+|====
+
+=== #등록#
+operation::sample-test/t03_add[snippets='curl-request,request-fields,http-request,response-fields,response-body']
+==== Response status
+|====
+| Status code | Usage
+| 200 | 성공
+| 400 | 사용자 요청 오류(유효하지 않은 데이터)
+|====
+
+=== #수정#
+operation::sample-test/t04_modify[snippets='curl-request,path-parameters,request-fields,http-request,response-fields,response-body']
+==== Response status
+|====
+| Status code | Usage
+| 200 | 성공
+| 400 | 사용자 요청 오류(유효하지 않은 데이터)
+| 404 | 사용자 응답 오류(데이터 없음)
+|====
+
+=== #삭제#
+operation::sample-test/t05_remove[snippets='curl-request,path-parameters,http-request,response-body']
+==== Response status
+|====
+| Status code | Usage
+| 200 | 성공
+| 404 | 사용자 응답 오류(데이터 없음)
+|====

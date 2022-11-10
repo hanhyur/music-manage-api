@@ -1,0 +1,157 @@
+#config
+---
+property:
+    name: ${user.dir}/@project.artifactId@-@project.version@.@packaging@
+    api :
+        end-point : /api
+    swagger:
+        info:
+            title  : @project.artifactId@
+            desc   : @project.artifactId@
+            version: @project.version@
+        contact:
+            name   : preah
+            url    : https://git-dev.ktmusic.co.kr/study/study-backend
+            email  : preah@niceday.io
+
+
+# default
+logging:
+    config: classpath:config/logback/logback.xml
+mybatis:
+    mapper-locations     : classpath:mapper/**/*.xml
+    type-handlers-package: kr.co.study.cms.common.base.handler
+    type-aliases-package : kr.co.study
+    configuration:
+        map-underscore-to-camel-case: true
+        auto-mapping-behavior       : full
+
+spring:
+    servlet:
+        multipart:
+            enabled            : true
+            max-file-size      : 20MB
+            max-request-size   : 20MB
+            file-size-threshold: 20MB
+            location           : /tmp/uploads/study-backend
+    messages:
+        always-use-message-format: false
+        encoding                 : UTF-8
+        basename                 : config/message/messages
+    h2:
+        console:
+            enabled: false
+            path   : /h2
+
+
+# default(local)
+---
+server:
+    port: 9090
+spring:
+    banner:
+        location: classpath:config/banner/default
+    flyway:
+        enabled            : true
+        baseline-on-migrate: true
+        table              : TB_PF_FLYWAY_ADMIN
+        locations          : classpath:/db/local
+    datasource:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        url              : jdbc:log4jdbc:sqlserver://127.0.0.1:1433;databaseName=niceday;integratedSecurity=false;
+        username         : sa
+        password         : niceday1234!
+        tomcat:
+            validation-query: select 1
+            test-on-borrow  : true
+property:
+    attach:
+        store-location: /tmp/uploads/store
+
+# test
+---
+server:
+    port : 9090
+spring:
+    profiles : test
+    servlet:
+        multipart:
+            location: /tmp/uploads/study-backend
+    banner:
+        location: classpath:config/banner/test
+    flyway:
+        enabled            : true
+        baseline-on-migrate: true
+        table              : TB_PF_FLYWAY_ADMIN
+        locations          : classpath:/db/migration
+    datasource:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        url              : jdbc:log4jdbc:sqlserver://192.168.10.219:1433;database=ASP_MC
+        username         : studyuser
+        password         : 123studyuser456
+        tomcat:
+            validation-query: select 1
+            test-on-borrow  : true
+property:
+    attach:
+        store-location: /tmp/uploads/store
+
+# dev
+---
+server:
+    port : 9090
+spring:
+    profiles : dev
+    servlet:
+        multipart:
+            location: /home/rebirth/temp/study-backend
+    banner:
+        location: classpath:config/banner/dev
+    flyway:
+        enabled            : true
+        baseline-on-migrate: true
+        table              : TB_PF_FLYWAY_ADMIN
+        locations          : classpath:/db/migration
+    datasource:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        url              : jdbc:log4jdbc:sqlserver://192.168.10.219:1433;database=ASP_MC
+        username         : studyuser
+        password         : 123studyuser456
+        tomcat:
+            validation-query: select 1
+            test-on-borrow  : true
+logging:
+    file: /data/app_logs/study-backend.log
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+property:
+    attach:
+        store-location: /Y/globalplatform
+
+# prod
+---
+server:
+    port : 9090
+spring:
+    profiles : prod
+    servlet:
+        multipart:
+            location: /home/rebirth/temp/study-backend
+    banner:
+        location: classpath:config/banner/prod
+    flyway:
+        enabled: false
+    datasource:
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        url              : jdbc:sqlserver://192.168.10.70:1433;database=ASP_MC
+        username         : studyuser
+        password         : 11study!ACtion/
+        tomcat:
+            validation-query: select 1
+            test-on-borrow  : true
+property:
+    attach:
+        store-location: /ND_F/globalplatform

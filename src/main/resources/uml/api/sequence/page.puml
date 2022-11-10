@@ -1,0 +1,19 @@
+@startuml
+actor 사용자
+사용자 -> controller : request\n(find form)
+controller -> service : form
+service -> repository : form
+repository -> mybatis : form
+mybatis -> mybatis : form to json
+mybatis -> DB : json
+DB -> DB : json to table
+DB -> mybatis : result
+mybatis -> mybatis : result to entity
+mybatis -> repository : entity
+repository -> service : entity
+service -> controller : entity
+controller -> mapper : entity
+mapper -> mapper : entity to form
+mapper -> controller : form
+controller -> 사용자 : response\n(findAll form)
+@enduml

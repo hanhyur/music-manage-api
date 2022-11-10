@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.study.api.basis.album.repository.AlbumRepository">
+
+    <resultMap id="pageMap" type="Paging">
+        <id property="number" column="number"/>
+        <collection property="contents" ofType="Album">
+            <id property="id" column="album_id"/>
+            <association property="artist" javaType="Artist">
+                <id property="id" column="artist_id"/>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="getPage" resultMap="pageMap">
+        { CALL DSP_PF_ALBUM_GET_PAGE ( #{page, typeHandler=JsonHandler}, #{find, typeHandler=JsonHandler} ) }
+    </select>
+
+    <resultMap id="getMap" type="Album">
+        <id property="id" column="album_id"/>
+        <association property="artist" columnPrefix="artist." javaType="Artist">
+            <id property="id" column="artist_id"/>
+        </association>
+        <collection property="soundtracks" columnPrefix="track." ofType="Soundtrack">
+            <id property="id" column="track_id"/>
+        </collection>
+    </resultMap>
+    <select id="get" resultMap="getMap">
+        { CALL DSP_PF_ALBUM_GET( #{album, typeHandler=JsonHandler} ) }
+    </select>
+
+    <select id="add" resultType="integer">
+        { CALL DSP_PF_ALBUM_ADD( #{album, typeHandler=JsonHandler} ) }
+    </select>
+
+    <select id="modify" resultType="integer">
+        { CALL DSP_PF_ALBUM_MODIFY( #{album, typeHandler=JsonHandler} ) }
+    </select>
+
+    <select id="remove" resultType="integer">
+        { CALL DSP_PF_ALBUM_REMOVE( #{album, typeHandler=JsonHandler} ) }
+    </select>
+
+</mapper>
+

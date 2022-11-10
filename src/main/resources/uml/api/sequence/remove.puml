@@ -1,0 +1,13 @@
+@startuml
+actor 사용자
+사용자 -> controller : request\n(remove path variable)
+controller -> mapper : id
+mapper -> mapper : id to entity
+mapper -> controller : entity
+controller -> service : entity
+service -> repository : entity
+repository -> mybatis : entity
+mybatis -> mybatis : entity to json
+mybatis -> DB : json
+DB -> DB : json to table
+@enduml

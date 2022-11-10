@@ -1,0 +1,19 @@
+@startuml
+actor 사용자
+사용자 -> controller : request\n(add form, modify form)
+controller -> mapper : form
+mapper -> mapper : form to entity
+mapper -> controller : entity
+controller -> service : entity
+service -> repository : entity
+repository -> mybatis : entity
+mybatis -> mybatis : entity to json
+mybatis -> DB : json
+DB -> DB : json to table
+DB -> mybatis : result
+mybatis -> mybatis : integer
+mybatis -> repository : integer
+repository -> service : integer
+service -> controller : integer
+controller -> 사용자 : response\n(integer)
+@enduml

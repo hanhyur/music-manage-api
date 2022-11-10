@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <springProfile name="default,local,test">
+        <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <prudent>true</prudent>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/tmp/logs/study-backend/study-backend.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>10</maxHistory>
+            </rollingPolicy>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>DEBUG</level>
+            </filter>
+            <encoder>
+                <pattern>%d{yyyy:MM:dd HH:mm:ss.SSS} %-5level --- [%thread] %logger{35} : %msg %n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="kr.co.study" level="DEBUG" />
+        <logger name="org.springframework.jdbc.support"    level="INFO"  />
+        <logger name="org.springframework.jdbc.datasource" level="INFO"  />
+        <logger name="org.springframework.jdbc"            level="DEBUG" />
+        <logger name="org.springframework.client"          level="DEBUG" />
+        <logger name="springfox.documentation"             level="WARN"  />
+        <logger name="jdbc.audit"                          level="OFF"   />
+        <logger name="jdbc.sqltiming"                      level="OFF"   />
+        <logger name="jdbc.resultset"                      level="OFF"   />
+        <logger name="jdbc.sqlonly"                        level="OFF"   />
+        <logger name="jdbc.connection"                     level="ERROR" />
+        <logger name="jdbc.resultsettable"                 level="DEBUG" />
+    </springProfile>
+
+    <springProfile name="dev">
+        <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <prudent>true</prudent>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/data/app_logs/study-backend.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>10</maxHistory>
+            </rollingPolicy>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>DEBUG</level>
+            </filter>
+            <encoder>
+                <pattern>%d{yyyy:MM:dd HH:mm:ss.SSS} %-5level --- [%thread] %logger{35} : %msg %n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="kr.co.study" level="DEBUG" />
+        <logger name="org.springframework.jdbc.support"    level="INFO"  />
+        <logger name="org.springframework.jdbc.datasource" level="INFO"  />
+        <logger name="org.springframework.jdbc"            level="DEBUG" />
+        <logger name="org.springframework.client"          level="DEBUG" />
+        <logger name="springfox.documentation"             level="WARN"  />
+        <logger name="jdbc.audit"                          level="OFF"   />
+        <logger name="jdbc.sqltiming"                      level="OFF"   />
+        <logger name="jdbc.resultset"                      level="OFF"   />
+        <logger name="jdbc.sqlonly"                        level="OFF"   />
+        <logger name="jdbc.connection"                     level="ERROR" />
+        <logger name="jdbc.resultsettable"                 level="DEBUG" />
+    </springProfile>
+
+    <springProfile name="prod">
+        <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <prudent>true</prudent>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/data/app_logs/study-backend.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>10</maxHistory>
+            </rollingPolicy>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>DEBUG</level>
+            </filter>
+            <encoder>
+                <pattern>%d{yyyy:MM:dd HH:mm:ss.SSS} %-5level --- [%thread] %logger{35} : %msg %n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="kr.co.study" level="INFO" />
+        <logger name="org.springframework.jdbc.support"    level="INFO" />
+        <logger name="org.springframework.jdbc.datasource" level="INFO" />
+        <logger name="org.springframework.jdbc"            level="INFO" />
+        <logger name="org.springframework.client"          level="INFO" />
+        <logger name="springfox.documentation"             level="WARN" />
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="dailyRollingFileAppender" />
+    </root>
+</configuration>

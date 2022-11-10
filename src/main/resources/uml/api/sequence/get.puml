@@ -1,0 +1,22 @@
+@startuml
+actor 사용자
+사용자 -> controller : request\n(get path variable)
+controller -> mapper : id
+mapper -> mapper : id to entity
+mapper -> controller : entity
+controller -> service : entity
+service -> repository : entity
+repository -> mybatis : entity
+mybatis -> mybatis : entity to json
+mybatis -> DB : json
+DB -> DB : json to table
+DB -> mybatis : result
+mybatis -> mybatis : result to entity
+mybatis -> repository : entity
+repository -> service : entity
+service -> controller : entity
+controller -> mapper : entity to form
+mapper -> controller : form
+controller -> 사용자 : response\n(findOne form)
+@enduml
+
