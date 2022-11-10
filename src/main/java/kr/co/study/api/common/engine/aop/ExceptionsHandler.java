@@ -1,7 +1,6 @@
 package kr.co.study.api.common.engine.aop;
 
 import kr.co.study.api.common.engine.constant.Constant;
-import kr.co.study.api.common.engine.exception.ResourceNotFoundException;
 import kr.co.study.api.common.engine.exception.common.ExceptionForm;
 import kr.co.study.api.common.engine.helper.exception.ExceptionHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -35,11 +34,9 @@ public class ExceptionsHandler {
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
 	}
 
-	@ExceptionHandler(ResourceNotFoundException.class)
-	public ExceptionForm resourceNotFoundException(ResourceNotFoundException e) {
-		log.error(e.getMessage());
-
-		return ExceptionHelper.getException(e.getMessage());
+	@ExceptionHandler
+	public ResponseEntity<?> handleBadRequestException(Exception e) {
+		return new ResponseEntity<>(ExceptionHelper.getException(e.getMessage()), HttpStatus.BAD_REQUEST);
 	}
 
 }

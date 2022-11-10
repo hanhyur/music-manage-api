@@ -5,7 +5,8 @@ import kr.co.study.api.basis.artist.form.ArtistForm.Request.Find;
 import kr.co.study.api.basis.artist.repository.ArtistRepository;
 import kr.co.study.api.common.base.entity.Paging;
 import kr.co.study.api.common.base.form.Pageable;
-import kr.co.study.api.common.engine.exception.ResourceNotFoundException;
+import kr.co.study.api.common.engine.exception.BadRequestException;
+import kr.co.study.api.common.engine.exception.common.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,7 @@ public class ArtistService {
     @Transactional(readOnly = true)
     public Artist get(Artist artist) {
         return artistRepository.get(artist)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(() -> new BadRequestException(ExceptionCode.E00110001));
     }
 
     public Integer add(Artist artist) {

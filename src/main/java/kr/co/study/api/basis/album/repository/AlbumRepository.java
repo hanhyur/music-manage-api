@@ -7,6 +7,8 @@ import kr.co.study.api.common.base.form.Pageable;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Optional;
+
 /**
  * @since       2022.11.02
  * @author      aslan
@@ -17,7 +19,7 @@ public interface AlbumRepository {
 
     Paging<Album> getPage(@Param("find") Request.Find find, @Param("page") Pageable page);
 
-    Album get(@Param("album") Album album);
+    Optional<Album> get(@Param("album") Album album);
 
     Integer add(@Param("album") Album album);
 

@@ -4,10 +4,13 @@ import kr.co.study.api.basis.album.entity.Album;
 import kr.co.study.api.basis.album.service.AlbumService;
 import kr.co.study.api.basis.artist.service.ArtistService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
+/**
+ * @since       2022.11.10
+ * @author      yadon079
+ * @description album adapter. This class is deprecated.
+ **********************************************************************************************************************/
 @RequiredArgsConstructor
-@Component
 public class AlbumAdapter {
 
     private final AlbumService albumService;

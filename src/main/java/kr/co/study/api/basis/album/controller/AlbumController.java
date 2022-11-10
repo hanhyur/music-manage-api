@@ -2,10 +2,9 @@ package kr.co.study.api.basis.album.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import kr.co.study.api.basis.album.adapter.AlbumAdapter;
-import kr.co.study.api.basis.album.service.AlbumService;
 import kr.co.study.api.basis.album.form.AlbumForm;
 import kr.co.study.api.basis.album.mapper.AlbumMapper;
+import kr.co.study.api.basis.album.service.AlbumService;
 import kr.co.study.api.common.base.entity.Paging;
 import kr.co.study.api.common.base.form.Pageable;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +25,6 @@ public class AlbumController {
 
     private final AlbumService albumService;
 
-    private final AlbumAdapter albumAdapter;
-
     @ApiOperation("페이지")
     @GetMapping("/albums/pages")
     public Paging<AlbumForm.Response.FindAll> getPage(@Valid AlbumForm.Request.Find find, Pageable page) {
@@ -43,14 +40,14 @@ public class AlbumController {
     @ApiOperation("등록")
     @PostMapping("/albums")
     public Integer add(@Valid @RequestBody AlbumForm.Request.Add add) {
-        return albumAdapter.add(AlbumMapper.mapper.toAlbum(add));
+        return albumService.add(AlbumMapper.mapper.toAlbum(add));
     }
 
     @ApiOperation("수정")
     @PutMapping("/albums/{albumId}")
     public Integer modify(@PathVariable Integer albumId,
                           @Valid @RequestBody AlbumForm.Request.Modify modify) {
-        return albumAdapter.modify(AlbumMapper.mapper.toAlbum(albumId, modify));
+        return albumService.modify(AlbumMapper.mapper.toAlbum(albumId, modify));
     }
 
     @ApiOperation("삭제")
