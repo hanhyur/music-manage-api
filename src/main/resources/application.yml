@@ -47,7 +47,7 @@ spring:
 # default(local)
 ---
 server:
-    port: 9090
+    port: 8080
 spring:
     banner:
         location: classpath:config/banner/default
